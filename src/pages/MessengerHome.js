@@ -2,10 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import ChatBox from "../components/ChatBox"; // Import ChatBox
 
 const MessengerHome = () => {
   const [users, setUsers] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,9 +44,9 @@ const MessengerHome = () => {
         <ul>
           {users.map((user) => (
             <li key={user._id} className="mb-2">
-              <Link
-                to={`/chat/${user._id}`}
-                className="flex items-center p-3 bg-white rounded-lg shadow-md hover:bg-gray-200"
+              <button
+                onClick={() => setSelectedUser(user)}
+                className="flex items-center p-3 bg-white rounded-lg shadow-md hover:bg-gray-200 w-full"
               >
                 <img
                   src={user.profilePicture || "https://via.placeholder.com/50"}
@@ -55,15 +57,21 @@ const MessengerHome = () => {
                   <p className="font-semibold">{user.name}</p>
                   <p className="text-sm text-gray-500">@{user.username}</p>
                 </div>
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
       </div>
 
-      {/* Chat Area Placeholder */}
-      <div className="w-2/3 flex items-center justify-center text-gray-400">
-        <p>Select a chat to start messaging</p>
+      {/* Chat Area */}
+      <div className="w-2/3 flex flex-col">
+        {selectedUser ? (
+          <ChatBox userId={currentUser._id} receiverId={selectedUser._id} />
+        ) : (
+          <div className="flex items-center justify-center h-full text-gray-400">
+            <p>Select a chat to start messaging</p>
+          </div>
+        )}
       </div>
     </div>
   );

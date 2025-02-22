@@ -14,7 +14,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ManageUsers from "./pages/ManageUsers";
 import ManagePosts from "./pages/ManagePosts";
 import MessengerHome from "./pages/MessengerHome";
-import ChatPage from "./pages/ChatPage";
 import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
@@ -40,7 +39,6 @@ const App = () => {
 
           {/* Messenger Routes */}
           <Route path="/messenger" element={<MessengerHome />} />
-          <Route path="/chat/:userId" element={<ChatPage />} />
         </Routes>
       </Router>
     </AuthProvider>
