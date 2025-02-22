@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/api/auth/login",
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
         formData,
         { headers: { "Content-Type": "application/json" } }
       );

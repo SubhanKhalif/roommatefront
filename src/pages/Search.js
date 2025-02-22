@@ -10,8 +10,8 @@ const Search = () => {
     const fetchPosts = async () => {
       try {
         const url = query
-          ? `http://localhost:3002/api/posts/search?location=${query}`
-          : `http://localhost:3002/api/posts`; // Fetch all if query is empty
+          ? `${process.env.REACT_APP_API_URL}/api/posts/search?location=${query}`
+          : `${process.env.REACT_APP_API_URL}/api/posts`; // Fetch all if query is empty
 
         const { data } = await axios.get(url);
         setResults(data);

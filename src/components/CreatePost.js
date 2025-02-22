@@ -14,7 +14,7 @@ const CreatePost = () => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const response = await axios.get("http://localhost:3002/api/users/profile", {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setUser(response.data);
@@ -55,7 +55,7 @@ const CreatePost = () => {
         } 
       };
 
-      const { data } = await axios.post("http://localhost:3002/api/posts/create", postWithUser, config);
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/posts/create`, postWithUser, config);
 
       setSuccessMessage("Post created successfully!");
       setPost({ title: "", description: "", location: "", rent: "" });

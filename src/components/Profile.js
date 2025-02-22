@@ -20,9 +20,14 @@ const Profile = () => {
     );
   }
 
+  const profilePicture = user.profilePicture || `${process.env.REACT_APP_API_URL}/default-avatar.png`;
+
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded-lg border border-gray-200">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">👤 Your Profile</h1>
+      <div className="flex justify-center mb-4">
+        <img src={profilePicture} alt="Profile" className="w-24 h-24 rounded-full" />
+      </div>
       <p className="text-gray-700"><strong>Name:</strong> {user.name}</p>
       <p className="text-gray-700"><strong>Email:</strong> {user.email}</p>
       <p className="text-gray-700"><strong>📍 Location:</strong> {user.location}</p>

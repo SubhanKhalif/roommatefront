@@ -17,7 +17,7 @@ const Dashboard = () => {
         const token = localStorage.getItem("token");
         const config = { headers: { Authorization: `Bearer ${token}` } };
   
-        const { data } = await axios.get("http://localhost:3002/api/posts/user", config);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts/user`, config);
         setUserPosts(data);
       } catch (error) {
         console.error("Error fetching user posts:", error);

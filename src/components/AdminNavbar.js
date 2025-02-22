@@ -18,15 +18,10 @@ const AdminNavbar = () => {
           <Link to="/admin/posts" className="hover:text-gray-400">
             Manage Posts
           </Link>
-          <Link to="/" className="hover:text-gray-400">
+          <Link to="/landingpage" className="hover:text-gray-400">
             Home
           </Link>
         </div>
-
-        {/* Logout Button */}
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-          Logout
-        </button>
       </div>
     </nav>
   );

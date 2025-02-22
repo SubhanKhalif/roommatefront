@@ -9,7 +9,7 @@ const LandingPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/api/posts");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
         const sortedPosts = response.data.sort(
           (a, b) => new Date(b.signupTime) - new Date(a.signupTime)
         );

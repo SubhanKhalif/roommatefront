@@ -8,7 +8,7 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3002/api/posts");
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`);
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);

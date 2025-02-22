@@ -17,6 +17,7 @@ const Navbar = () => {
         <div className="flex space-x-6">
           <Link to="/" className="hover:text-gray-300 transition">Home</Link>
           <Link to="/search" className="hover:text-gray-300 transition">Search</Link>
+          <Link to="/messenger" className="hover:text-gray-300 transition">Messenger</Link>
 
           {user ? (
             <>
