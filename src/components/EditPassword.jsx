@@ -2,11 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const EditPassword = ({ email, logout }) => {
+const EditPassword = ({ email: initialEmail, logout }) => {
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState(initialEmail);
   const navigate = useNavigate();
 
   const handleSendEmail = async () => {
@@ -49,7 +50,12 @@ const EditPassword = ({ email, logout }) => {
       {step === 1 && (
         <>
           <p>Enter your email to receive an OTP:</p>
-          <input type="email" value={email} disabled className="w-full p-2 border rounded-md mt-2" />
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-2 border rounded-md mt-2" 
+          />
           <button onClick={handleSendEmail} className="bg-blue-600 text-white px-4 py-2 rounded-md mt-2">Send OTP</button>
         </>
       )}

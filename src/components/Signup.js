@@ -58,15 +58,6 @@ const Signup = () => {
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             required
           />
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="isAdmin1"
-              className="mr-2"
-              onChange={(e) => setFormData({ ...formData, isAdmin1: e.target.checked })}
-            />
-            <label htmlFor="isAdmin1" className="text-gray-700">Admin बनें</label>
-          </div>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-300"

@@ -1,24 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChatBox from "../components/ChatBox";
+import { AuthContext } from "../context/AuthContext";
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [showChat, setShowChat] = useState(false);
+  const { user: currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/${userId}`);
+        const token = localStorage.getItem("token");
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/${userId}`, config);
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
-    fetchUser();
-  }, [userId]);
+
+    if (currentUser) {
+      fetchUser();
+    }
+  }, [userId, currentUser]);
+
+  if (!currentUser) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <p className="text-center text-gray-600">
+          🔒 Please <span className="text-blue-500 font-semibold">log in</span> to view profiles.
+        </p>
+      </div>
+    );
+  }
 
   if (!user) {
     return <p className="text-center mt-10">Loading user profile...</p>;
@@ -57,7 +75,7 @@ const ProfilePage = () => {
           </button>
         </div>
 
-        {showChat && <ChatBox currentUser={{ _id: "YOUR_LOGGED_IN_USER_ID" }} />}
+        {showChat && <ChatBox currentUser={{ _id: currentUser._id }} />}
       </div>
     </div>
   );
